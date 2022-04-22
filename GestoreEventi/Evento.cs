@@ -8,6 +8,7 @@ namespace GestoreEventi
 {
     internal class Evento
     {
+        private static DateTime dataOraAttuale = DateTime.Now;
         private string titolo;
         private DateTime data;
         private int capienzaMassima;
@@ -19,6 +20,25 @@ namespace GestoreEventi
             this.data = data;
             this.capienzaMassima = capienzaMassima;
             this.numeroPostiPrenotati = 0;
+
+
+
+            if (data < dataOraAttuale)
+            {
+                throw new ArgumentOutOfRangeException("dataTime", "Mi dispiace non puoi andare indietro nel tempo");
+            }
+
+            if(String.IsNullOrEmpty(titolo))
+            {
+                throw new ArgumentNullException("Mi dispiace il titolo non può essere nullo");
+            }
+
+            if(capienzaMassima < 0)
+            {
+                throw new ArgumentOutOfRangeException("caienza massima", "Mi dispiace ma la capienza non può essere negativa ");
+            }
+
+
         }
 
 
@@ -58,6 +78,10 @@ namespace GestoreEventi
         {
             numeroPostiPrenotati += postiPassati;
             capienzaMassima-= postiPassati;
+            if(postiPassati > capienzaMassima)
+            {
+                throw new ArgumentOutOfRangeException("postiPassati", "Mi dispiace hai prenotato più posti rispetto alla capienza massima o i posti sono esauriti");
+            }
 
         }
 
@@ -70,7 +94,14 @@ namespace GestoreEventi
 
 
 
-     
+        public void StampaEvento()
+        {
+            Console.WriteLine("-----EVENTO------");
+            Console.WriteLine("nome dell'evento: " + titolo);
+            Console.WriteLine("data dell'evento: " + data);
+            Console.WriteLine("capienza dell'evento: " + capienzaMassima);
+
+        }
 
 
 

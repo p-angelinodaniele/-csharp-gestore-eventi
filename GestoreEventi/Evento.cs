@@ -25,7 +25,7 @@ namespace GestoreEventi
 
             if (data < dataOraAttuale)
             {
-                throw new ArgumentOutOfRangeException("dataTime", "Mi dispiace non puoi andare indietro nel tempo");
+                throw new ArgumentException("dataTime", "Mi dispiace non puoi andare indietro nel tempo");
             }
 
             if(String.IsNullOrEmpty(titolo))

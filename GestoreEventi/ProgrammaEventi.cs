@@ -18,6 +18,12 @@ namespace GestoreEventi
         {
             this.titolo = titolo;
             Eventi = eventi;
+
+
+            if (String.IsNullOrEmpty(titolo))
+            {
+                throw new ArgumentNullException("Mi dispiace il titolo del programma non può essere nullo");
+            }
         }
 
 
